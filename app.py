@@ -1,4 +1,5 @@
-from flask import Flask, request, render_template
+from urllib import response
+from flask import Flask, request, render_template,jsonify
 
 app = Flask(__name__)
 
@@ -29,3 +30,16 @@ def show_exercise_html():
 @app.route("/exercise")
 def exercise():
     return render_template("answer.html", name=request.args.get("my_name"))
+
+@app.route('/try_rest', methods=['POST'])
+def try_rest():
+    request_json = request.get_json()
+    print(request_json)
+    print(type(request_json))
+    name = request_json['name']
+    print(name)
+    response_json = {"response_json": request_json}
+    return jsonify(response_json)
+
+
+
